@@ -18,4 +18,82 @@ class Game{
         //This is the Phrase object that’s currently in play
         this.activePhrase = null;
     }
+
+    getRandomPhrase(){
+        //pick random phrase from the array
+        const randomPhraseIndex = Math.floor(Math.random() * this.phrases.length);
+        return this.phrases[randomPhraseIndex]; 
+    }
+    startGame(){
+        const overlay = document.getElementById('overlay')
+
+        //hide start screen
+        overlay.style.display = 'none'
+
+        //chose random phrase
+        this.activePhrase = this.getRandomPhrase();
+
+        //place the phrase on game board
+        this.activePhrase.addPhraseToDisplay()
+
+
+    }
+
+    handleInteraction(button){
+        //get letter from keyboard that was clicked
+        const letter = button.textContent.toLowerCase();
+        //prevent player to select same letter
+        button.disabled = true;
+
+        if(this.activePhrase.checkLetter(letter)){
+            //correct guess
+            button.classList.add('chosen');
+            this.activePhrase.showMatchedLetter(letter);
+
+            if(this.checkForWin()){
+                this.gameOver(true);
+            }
+        }else{
+            button.classList.add('wrong');
+            this.removeLife()
+        }
+
+    }
+
+    removeLife(){
+        
+        const lifes = document.querySelectorAll('#scoreboard img');
+        lifes[this.missed ].src = 'images/lostHeart.png';
+        this.missed += 1;
+
+        if (this.missed === 5){
+            this.gameOver(false)
+        }
+    }
+
+    checkForWin(){
+        const hiddenletters = document.querySelectorAll("#phrase .letter.hide");
+        //player wins when theres no hidden letters left
+        return hiddenletters.length === 0;
+    }
+
+    gameOver(){
+        const overlay = document.getElementById('overlay');
+        const message = document.getElementById('game-over-message');
+        const btnReset = document.getElementById('btn__reset');
+
+        overlay.style.display = 'flex';
+
+        if (this.checkForWin()){
+            message.textContent = 'You Won!!!'
+            overlay.classList.remove('start');
+            overlay.classList.add('win');
+        }else{
+            message.textContent = "You lost. Try again!";
+            overlay.classList.remove('start');
+            overlay.classList.add('lose');
+        }
+
+        btnReset.textContent = "Play Again";
+    }
 }
