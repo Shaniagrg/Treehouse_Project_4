@@ -25,3 +25,26 @@ qwerty.addEventListener('click', (e) => {
         game.handleInteraction(clickedButton);
     }
 });
+
+//use their physical computer keyboard to enter guesses
+document.addEventListener('keydown', (e) => {
+    //do nothing if the game hasnt started
+    if(!game){
+        return;
+    }
+
+    const enterKey = e.key.toLocaleLowerCase();
+
+    //accept letter from a to z
+    if (enterKey >= 'a' && enterKey <= 'z'){
+
+        //find the matching keyboard button
+        const keyboardButton = document.querySelectorAll('#qwerty button');
+
+        keyboardButton.forEach(button => {
+            if(button.textContent === enterKey){
+                game.handleInteraction(button);
+            }
+        })
+    }
+})
