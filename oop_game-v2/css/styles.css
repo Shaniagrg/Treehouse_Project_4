@@ -20,7 +20,7 @@
 
 * {
   box-sizing: border-box;
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'poppins', sans-serif;
 }
 
 body {
@@ -28,6 +28,7 @@ body {
   flex-direction: column;
   display: flex;
   height: 100vh;
+  background-color: rgb(226, 240, 253);
 }
 
 li, ol, ul {
@@ -44,6 +45,22 @@ h2 {
 
 h1 {
   font-size: 30px;
+}
+
+.title{
+  display: inline-block;
+  animation: titleZoom 2s ease-in-out infinite;
+}
+@keyframes titleZoom{
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.15);
+  }
+  100% {
+    transform: scale(1);
+  }
 }
 
 button {
@@ -97,10 +114,13 @@ button {
   height: 65px;
   width: 65px;
   padding: 20px 1px 0 1px;
-  margin-right: 2px;
+  margin-right: 6px;
   color: transparent;
   background: var(--color-neutral-light);
   border-radius: 5px;
+
+  box-shadow: 0 1px 1px black;
+  
 }
 
 .space {
