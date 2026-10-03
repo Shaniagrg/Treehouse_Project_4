@@ -96,4 +96,36 @@ class Game{
 
         btnReset.textContent = "Play Again";
     }
+
+    resetGame(){
+        const phraseElements = document.querySelector('#phrase ul');
+        const keyboardButtons = document.querySelectorAll('#qwerty button');
+        const lifes = document.querySelectorAll('#scoreboard img');
+        const overlay = document.getElementById('overlay');
+        const message = document.getElementById('game-over-message');
+        const btnReset = document.getElementById('btn__reset');
+
+        //Remove the previous phrase
+        phraseElements.innerHTML = "";
+
+        //reset the number of hearts
+        this.missed = 0;
+
+        //reset keyboard button
+        keyboardButtons.forEach(button => {
+            button.disabled = false;
+            button.className = "key"
+        });
+
+        //restore all lifes 
+        lifes.forEach(life => {
+            life.src = "images/liveHeart.png"
+        });
+
+        //reset overlay
+        overlay.className = "start";
+        message.textContent = "";
+        btnReset.textContent = "Start Game";
+
+    }
 }
