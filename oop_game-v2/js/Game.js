@@ -77,14 +77,14 @@ class Game{
         return hiddenletters.length === 0;
     }
 
-    gameOver(){
+    gameOver(isWin){
         const overlay = document.getElementById('overlay');
         const message = document.getElementById('game-over-message');
         const btnReset = document.getElementById('btn__reset');
 
         overlay.style.display = 'flex';
 
-        if (this.checkForWin()){
+        if (isWin){
             message.textContent = 'You Won!!!'
             overlay.classList.remove('start');
             overlay.classList.add('win');

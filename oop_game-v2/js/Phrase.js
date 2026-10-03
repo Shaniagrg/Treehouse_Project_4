@@ -35,7 +35,7 @@ class Phrase{
 
     //reveal all matching letter 
     showMatchedLetter(letter){
-        const matchedLetter = document.querySelectorAll(`#phrase .letter.${letter}`)
+        const matchedLetter = document.querySelectorAll(`#phrase .letter.${letter}`);
 
         //show matching letter
         matchedLetter.forEach(letters => {
